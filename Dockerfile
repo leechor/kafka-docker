@@ -15,7 +15,9 @@ ENV PATH=${PATH}:${KAFKA_HOME}/bin
 
 COPY download-kafka.sh start-kafka.sh broker-list.sh create-topics.sh versions.sh /tmp/
 
-RUN apk add --no-cache bash curl jq docker \
+RUN echo http://mirrors.ustc.edu.cn/alpine/v3.6/main > /etc/apk/repositories \
+ && echo http://mirrors.ustc.edu.cn/alpine/v3.6/community >> /etc/apk/repositories \
+ && apk add --no-cache bash curl jq docker \
  && mkdir /opt \
  && chmod a+x /tmp/*.sh \
  && mv /tmp/start-kafka.sh /tmp/broker-list.sh /tmp/create-topics.sh /tmp/versions.sh /usr/bin \
